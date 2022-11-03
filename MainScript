@@ -1,0 +1,352 @@
+
+local Library = {}
+
+function Library:CreateWindow(Named)
+	local Exploits = Instance.new("ScreenGui")
+	local UICorner = Instance.new("UICorner")
+	local Main = Instance.new("Frame")
+	local Lists = Instance.new("Folder")
+	local GuiName = Instance.new("TextLabel")
+	local MainList = Instance.new("Frame")
+	local UICorner_5 = Instance.new("UICorner")
+	local UIListLayout_2 = Instance.new("UIListLayout")
+	
+	Exploits.Name = "Exploits"
+	Exploits.Parent = game.CoreGui
+	Exploits.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Main.Name = "Main"
+	Main.Parent = Exploits
+	Main.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+	Main.Position = UDim2.new(0.257913232, 0, 0.293103456, 0)
+	Main.Size = UDim2.new(0, 400, 0, 300)
+
+	UICorner.CornerRadius = UDim.new(0, 16)
+	UICorner.Parent = Main
+
+	Lists.Name = "Lists"
+	Lists.Parent = Main
+	
+	GuiName.Name = "GuiName"
+	GuiName.Parent = Main
+	GuiName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	GuiName.BackgroundTransparency = 1.000
+	GuiName.Size = UDim2.new(0, 141, 0, 63)
+	GuiName.Font = Enum.Font.SourceSans
+	GuiName.Text = Named
+	GuiName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	GuiName.TextScaled = true
+	GuiName.TextSize = 14.000
+	GuiName.TextWrapped = true
+	
+	MainList.Name = "MainList"
+	MainList.Parent = Main
+	MainList.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+	MainList.Position = UDim2.new(0.0175000001, 0, 0.230000004, 0)
+	MainList.Size = UDim2.new(0, 134, 0, 231)
+
+	UICorner_5.CornerRadius = UDim.new(0, 6)
+	UICorner_5.Parent = MainList
+
+	UIListLayout_2.Parent = MainList
+	UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout_2.Padding = UDim.new(0, 7)
+	
+	local function JIEJD_fake_script() -- Main.Drag 
+		local script = Instance.new('LocalScript', Main)
+
+
+		local UIS = game:GetService("UserInputService")
+		function dragify(Frame)
+			dragToggle = nil
+			local dragSpeed = 0
+			dragInput = nil
+			dragStart = nil
+			local dragPos = nil
+			function updateInput(input)
+				local Delta = input.Position - dragStart
+				local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+				game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
+			end
+			Frame.InputBegan:Connect(function(input)
+				if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+					dragToggle = true
+					dragStart = input.Position
+					startPos = Frame.Position
+					input.Changed:Connect(function()
+						if input.UserInputState == Enum.UserInputState.End then
+							dragToggle = false
+						end
+					end)
+				end
+			end)
+			Frame.InputChanged:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+					dragInput = input
+				end
+			end)
+			game:GetService("UserInputService").InputChanged:Connect(function(input)
+				if input == dragInput and dragToggle then
+					updateInput(input)
+				end
+			end)
+		end
+		dragify(script.Parent)
+	end
+	coroutine.wrap(JIEJD_fake_script)()
+	
+	local C = {}
+	
+	function C:CreateButton(Text,ListToOpen)
+		local Button = Instance.new("TextButton")
+		local UICorner_6 = Instance.new("UICorner")
+		
+		Button.Name = Text
+		Button.Text = Text
+		Button.Parent = MainList
+		Button.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+		Button.BackgroundTransparency = 1.000
+		Button.Position = UDim2.new(0.0895522386, 0, 0, 0)
+		Button.Size = UDim2.new(0, 112, 0, 32)
+		Button.Font = Enum.Font.SourceSans
+		Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Button.TextScaled = true
+		Button.TextSize = 14.000
+		Button.TextWrapped = true
+
+		UICorner_6.CornerRadius = UDim.new(0, 4)
+		UICorner_6.Parent = Button
+		Button.MouseButton1Click:Connect(function()
+			if Lists:FindFirstChild(ListToOpen) then
+				local b = MainList:GetChildren()
+				for i=1, #b do
+					if b[i]:IsA("TextButton") then
+						b[i].BackgroundTransparency = 1
+					end
+				end
+				local e = Lists:GetChildren()
+				for i=1,#e do
+					e[i].Visible = false
+				end
+				Button.BackgroundTransparency = 0
+				Lists:FindFirstChild(ListToOpen).Visible = true
+			end
+		end)
+	end
+	
+	function C:CreateList(Named)
+		local List = Instance.new("Frame")
+		local UIListLayout = Instance.new("UIListLayout")
+		
+		List.Name = Named
+		List.Parent = Lists
+		List.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		List.BackgroundTransparency = 1.000
+		List.Position = UDim2.new(0.417499989, 0, 0.0500000007, 0)
+		List.Size = UDim2.new(0, 220, 0, 270)
+		List.Visible = false
+		
+		UIListLayout.Parent = List
+		UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+		UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+		UIListLayout.Padding = UDim.new(0, 7)
+	end
+	
+	function C:CreateListButton(Text,List,callback)
+		local callback = callback or function() end
+		
+		local Button2 = Instance.new("TextButton")
+		local UICorner_2 = Instance.new("UICorner")
+		
+		if Lists:FindFirstChild(List) then
+			Button2.Parent = Lists:FindFirstChild(List)
+		else
+			Button2:Destroy()
+			UICorner_2:Destroy()
+		end
+		Button2.Name = Text
+		Button2.Text = Text
+		Button2.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+		Button2.Position = UDim2.new(0.0454545468, 0, 0, 0)
+		Button2.Size = UDim2.new(0, 200, 0, 48)
+		Button2.Font = Enum.Font.SourceSans
+		Button2.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Button2.TextScaled = true
+		Button2.TextSize = 14.000
+		Button2.TextWrapped = true
+
+		UICorner_2.CornerRadius = UDim.new(0, 6)
+		UICorner_2.Parent = Button2
+		
+		Button2.MouseButton1Click:Connect(function()
+			pcall(callback)
+		end)
+	end
+	
+	function C:CreateListToggle(Textt,List,callback)
+		local actions = {}
+		local enabled = false
+		
+		local callback = callback or function() end
+		
+		local Toggle = Instance.new("Frame")
+		local Text = Instance.new("TextLabel")
+		local UICorner_3 = Instance.new("UICorner")
+		local Buton = Instance.new("TextButton")
+		local UICorner_4 = Instance.new("UICorner")
+		local Freme = Instance.new("Frame")
+		local UICorner66 = Instance.new("UICorner")
+
+		if Lists:FindFirstChild(List) then
+			Toggle.Parent = Lists:FindFirstChild(List)
+		else
+			Toggle:Destroy()
+			Text:Destroy()
+			UICorner_3:Destroy()
+			Buton:Destroy()
+			UICorner_4:Destroy()
+			Freme:Destroy()
+			UICorner66:Destroy()
+		end
+		
+		Toggle.Name = Textt
+		Toggle.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+		Toggle.Size = UDim2.new(0, 200, 0, 48)
+
+		Text.Name = "Text"
+		Text.Parent = Toggle
+		Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Text.BackgroundTransparency = 1.000
+		Text.Position = UDim2.new(0, 0, -0.020833334, 0)
+		Text.Size = UDim2.new(0, 119, 0, 46)
+		Text.Font = Enum.Font.SourceSans
+		Text.Text = Textt
+		Text.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Text.TextScaled = true
+		Text.TextSize = 14.000
+		Text.TextWrapped = true
+
+		UICorner_3.CornerRadius = UDim.new(0, 6)
+		UICorner_3.Parent = Toggle
+
+		Buton.Name = "Buton"
+		Buton.Parent = Toggle
+		Buton.BackgroundColor3 = Color3.fromRGB(184, 184, 184)
+		Buton.Position = UDim2.new(0.605000019, 0, 0.145833328, 0)
+		Buton.Size = UDim2.new(0, 34, 0, 34)
+		Buton.Font = Enum.Font.SourceSans
+		Buton.Text = ""
+		Buton.TextColor3 = Color3.fromRGB(0, 0, 0)
+		Buton.TextSize = 14.000
+
+		UICorner_4.CornerRadius = UDim.new(0, 300)
+		UICorner_4.Parent = Buton
+		
+		Freme.Name = "Freme"
+		Freme.Parent = Toggle
+		Freme.BackgroundColor3 = Color3.fromRGB(156, 156, 156)
+		Freme.Position = UDim2.new(0.605000029, 0, 0.229166672, 0)
+		Freme.Size = UDim2.new(0, 63, 0, 26)
+		Freme.ZIndex = 0
+
+		UICorner66.CornerRadius = UDim.new(0, 300)
+		UICorner66.Parent = Freme
+		
+		local function fire()
+			enabled = not enabled
+			Buton.BackgroundColor3 = enabled and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(184, 184, 184)
+			if enabled == true then
+				Buton:TweenPosition(UDim2.new(0.760, 0,0.146, 0), "InOut","Linear", 0.1)
+			else
+				Buton:TweenPosition(UDim2.new(0.605, 0,0.146, 0), "InOut","Linear", 0.1)
+			end
+			
+			pcall(callback,enabled)
+		end
+		
+		Buton.MouseButton1Click:Connect(fire)
+		
+		--[[function actions:Set(arg)
+			Buton.BackgroundColor3 = enabled and Color3.fromRGB(12, 255, 0) or Color3.fromRGB(255, 0, 4)
+			pcall(callback,arg)
+		end]]
+	end
+	
+	return C
+end
+
+local main = Library:CreateWindow("Project Delta")
+
+main:CreateButton("Main", "Main")
+
+main:CreateButton("Misc", "Misc")
+
+main:CreateList("Main")
+
+main:CreateList("Misc")
+
+local NoFog = false
+local BotEsp = false
+
+main:CreateListButton("Aim/Esp","Main",function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Blissful4992/Miscellaneous/main/UNIVERSAL.lua"))()
+end)
+
+main:CreateListButton("Inf Yield","Main",function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
+
+main:CreateListToggle("BotEsp", "Main",function(state)
+    BotEsp = state
+end)
+
+main:CreateListToggle("No Fog", "Main",function(state)
+    NoFog = state
+end)
+
+main:CreateListButton("Destroy GUI","Misc",function()
+    game.CoreGui.Exploits:Destroy()
+end)
+
+while wait() do
+    if BotEsp == true then
+        local c = workspace.AiZones:GetChildren()
+        for i=1,#c do 
+                local h = c[i]:GetChildren()
+                for b=1,#h do
+                    if not h[b]:FindFirstChild("BillboardGui") then
+                        local high = Instance.new("Highlight")
+                        high.Parent = h[b]
+                        local high = Instance.new("BillboardGui")
+                        high.AlwaysOnTop = true
+                        high.Size = UDim2.new(1,0,2,0)
+                        high.Parent = h[b]
+                        local frame = Instance.new("TextLabel",high)
+                        if h[b]:FindFirstChild("Humanoid") then
+                            frame.Text = "(HP"..h[b].Humanoid.Health..") "..h[b].Name
+                        else
+                            frame.Text = h[b].Name
+                        end
+                        frame.BackgroundTransparency = 1
+                        frame.TextColor3 = Color3.new(255,0,0)
+                        frame.Size = UDim2.new(1,0,2,0)
+                    else
+                        h[b]:FindFirstChild("Highlight"):Destroy()
+                        local high = Instance.new("Highlight")
+                        high.Parent = h[b]
+                        if h[b]:FindFirstChild("Humanoid") then
+                            h[b].BillboardGui.TextLabel.Text = "(HP"..h[b].Humanoid.Health..") "..h[b].Name
+                        else
+                            h[b].BillboardGui.TextLabel.Text = h[b].Name
+                        end
+                end
+            end
+        end
+    end
+    if NoFog == true then
+        game.Lighting.FogEnd = 999999999999
+        game.Lighting.FogStart = 999999
+    end
+    wait()
+end
