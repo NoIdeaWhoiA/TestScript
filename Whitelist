@@ -1,10 +1,10 @@
 
 
-local WhitelistingTable = loadstring("https://raw.githubusercontent.com/NoIdeaWhoiA/TestScript/main/WiteListed?token=GHSAT0AAAAAAB2R3KKMDOPZHB5UTMNO5RWUY26IAHQ")
+local WhitelistingTable = loadstring("https://raw.githubusercontent.com/NoIdeaWhoiA/TestScript/main/WiteListed")
 local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
 
 for i,v in pairs(WhitelistingTable) do
     if v == HWID then
-    
+        loadstring("https://raw.githubusercontent.com/NoIdeaWhoiA/TestScript/main/MainScript")
     end
 end
