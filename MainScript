@@ -366,10 +366,9 @@ while wait() do
                         local frame = Instance.new("TextLabel",high)
                         frame.Text = h[b].Name.." (Body/Item)"
                         frame.BackgroundTransparency = 1
-                        frame.TextColor3 = Color3.new(255,0,0)
+                        frame.TextColor3 = Color3.new(0,0,255)
                         frame.Size = UDim2.new(1,0,2,0)
                     else
-                        h[b]:FindFirstChild("Highlight"):Destroy()
                         local high = Instance.new("Highlight")
                         high.Parent = h[b]
                         h[b].BillboardGui.TextLabel.Text = h[b].Name.." (Body/Item)"
