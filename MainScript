@@ -288,6 +288,7 @@ main:CreateList("Misc")
 
 local NoFog = false
 local BotEsp = false
+local BodyEsp = false
 
 main:CreateListButton("Aim/Esp","Main",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Blissful4992/Miscellaneous/main/UNIVERSAL.lua"))()
@@ -297,8 +298,12 @@ main:CreateListButton("Inf Yield","Main",function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
 
-main:CreateListToggle("BotEsp", "Main",function(state)
+main:CreateListToggle("Bot Esp", "Main",function(state)
     BotEsp = state
+end)
+
+main:CreateListToggle("Body/Item Esp", "Main",function(state)
+    BodyEsp = state
 end)
 
 main:CreateListToggle("No Fog", "Main",function(state)
@@ -344,9 +349,23 @@ while wait() do
             end
         end
     end
+    if BodyEsp == true then
+	local c = workspace.DroppedItems:GetChildren()
+	for i=1,#c do 
+		local high = Instance.new("BillboardGui")
+		high.AlwaysOnTop = true
+		high.Size = UDim2.new(1,0,2,0)
+		high.Parent = c[i]
+		local frame = Instance.new("TextLabel",high)
+		frame.Text = c[i].Name.." (Body/Item)"
+		frame.BackgroundTransparency = 1
+		frame.TextColor3 = Color3.new(0,0,255)
+		frame.Size = UDim2.new(1,0,2,0)
+	end
+    end
     if NoFog == true then
-        game.Lighting.FogEnd = 999999999999
-        game.Lighting.FogStart = 999999
+        game.Lighting.FogEnd = 0
+        game.Lighting.FogStart = 0
     end
     wait()
 end
