@@ -356,23 +356,18 @@ while wait() do
     if BodyEsp == true then
         local c = workspace.DroppedItems:GetChildren()
         for i=1,#c do 
-                local h = c[i]:GetChildren()
-                for b=1,#h do
-                    if not h[b]:FindFirstChild("BillboardGui") then
-                        local high = Instance.new("BillboardGui")
-                        high.AlwaysOnTop = true
-                        high.Size = UDim2.new(1,0,2,0)
-                        high.Parent = h[b]
-                        local frame = Instance.new("TextLabel",high)
-                        frame.Text = h[b].Name.." (Body/Item)"
-                        frame.BackgroundTransparency = 1
-                        frame.TextColor3 = Color3.new(0,0,255)
-                        frame.Size = UDim2.new(1,0,2,0)
-                    else
-                        local high = Instance.new("Highlight")
-                        high.Parent = h[b]
-                        h[b].BillboardGui.TextLabel.Text = h[b].Name.." (Body/Item)"
-                end
+       	    if not с[i]:FindFirstChild("BillboardGui") then
+                local high = Instance.new("BillboardGui")
+                high.AlwaysOnTop = true
+                high.Size = UDim2.new(1,0,2,0)
+                high.Parent = c[i]
+                local frame = Instance.new("TextLabel",high)
+		frame.Text = c[i].Name.." (Body/Item)"
+                frame.BackgroundTransparency = 1
+                frame.TextColor3 = Color3.new(0,0,255)
+                frame.Size = UDim2.new(1,0,2,0)
+            else
+                h[b].BillboardGui.TextLabel.Text = c[i].Name.." (Body/Item)"
             end
         end
     end
