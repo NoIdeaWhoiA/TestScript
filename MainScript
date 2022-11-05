@@ -310,6 +310,10 @@ main:CreateListToggle("No Fog", "Main",function(state)
     NoFog = state
 end)
 
+main:CreateListButton("Remove Visor Effect"."Misc",function()
+    game:GetService("Players").LocalPlayer.PlayerGui.MainGui.MainFrame.ScreenEffects.Visor.Visible = false
+end)
+
 main:CreateListButton("Destroy GUI","Misc",function()
     game.CoreGui.Exploits:Destroy()
 end)
