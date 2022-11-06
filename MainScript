@@ -302,7 +302,7 @@ main:CreateListToggle("Bot Esp", "Main",function(state)
     BotEsp = state
 end)
 
-main:CreateListToggle("Body/Item Esp", "Main",function(state)
+main:CreateListToggle("Body Esp", "Main",function(state)
     BodyEsp = state
 end)
 
@@ -362,7 +362,7 @@ while wait() do
                 high.Size = UDim2.new(1,0,2,0)
                 high.Parent = c[i]
                 local frame = Instance.new("TextLabel",high)
-		frame.Text = c[i].Name.." (Body/Item)"
+		frame.Text = c[i].Name.." (Body)"
                 frame.BackgroundTransparency = 1
                 frame.TextColor3 = Color3.new(0,0,255)
                 frame.Size = UDim2.new(1,0,2,0)
