@@ -1,5 +1,54 @@
+local tween = game.TweenService
 
 local Library = {}
+
+if not game.CoreGui:FindFirstChild("Crosshair") then
+    local Crosshair = Instance.new("ScreenGui")
+    local Dot = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local Crosshair_2 = Instance.new("Frame")
+    local Frame = Instance.new("Frame")
+    local Frame_2 = Instance.new("Frame")
+    
+    Crosshair.Name = "Crosshair"
+    Crosshair.Parent = game.CoreGui
+    Crosshair.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    
+    Dot.Name = "Dot"
+    Dot.Parent = Crosshair
+    Dot.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Dot.Position = UDim2.new(0.5, 0, 0.485, 0)
+    Dot.Size = UDim2.new(0, 10, 0, 10)
+    Dot.Visible = false
+    Dot.ZIndex = 0
+    
+    UICorner.CornerRadius = UDim.new(0, 256)
+    UICorner.Parent = Dot
+    
+    Crosshair_2.Name = "Crosshair"
+    Crosshair_2.Parent = Crosshair
+    Crosshair_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Crosshair_2.BackgroundTransparency = 1.000
+    Crosshair_2.Position = UDim2.new(0.465, 0, 0.42, 0)
+    Crosshair_2.Size = UDim2.new(0, 100, 0, 100)
+    Crosshair_2.ZIndex = 0
+    Crosshair_2.Visible = false
+    
+    Frame.Parent = Crosshair_2
+    Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Frame.BorderSizePixel = 0
+    Frame.Position = UDim2.new(0.49000001, 0, 0.370000005, 0)
+    Frame.Size = UDim2.new(0, 2, 0, 25)
+    Frame.ZIndex = 0
+    
+    Frame_2.Parent = Crosshair_2
+    Frame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Frame_2.BorderSizePixel = 0
+    Frame_2.Position = UDim2.new(0.49000001, 0, 0.370000005, 0)
+    Frame_2.Rotation = 90.000
+    Frame_2.Size = UDim2.new(0, 2, 0, 25)
+    Frame_2.ZIndex = 0
+end
 
 function Library:CreateWindow(Named)
 	local Exploits = Instance.new("ScreenGui")
@@ -11,7 +60,7 @@ function Library:CreateWindow(Named)
 	local UICorner_5 = Instance.new("UICorner")
 	local UIListLayout_2 = Instance.new("UIListLayout")
 	
-	Exploits.Name = "Exploits"
+	Exploits.Name = "PJE"
 	Exploits.Parent = game.CoreGui
 	Exploits.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -273,6 +322,141 @@ function Library:CreateWindow(Named)
 		end]]
 	end
 	
+	function C:CreateListSButton(Text,List,tableee,callback)
+	    
+	    local callback = callback or function() end
+	    
+	    local SButton = Instance.new("TextButton")
+        local UICorner = Instance.new("UICorner",SButton)
+        local Settings = Instance.new("Frame",SButton)
+        local UICorner_2 = Instance.new("UICorner",Settings)
+        local UIListLayout = Instance.new("UIListLayout",Settings)
+        
+        SButton.Name = "SettingButton"
+        SButton.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+        SButton.Size = UDim2.new(0, 200, 0, 48)
+        SButton.Text = Text
+        SButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SButton.TextScaled = true
+        SButton.TextWrapped = true
+        
+        UICorner.CornerRadius = UDim.new(0, 6)
+        
+        Settings.Name = "Settings"
+        Settings.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+        Settings.BackgroundTransparency = 1.000
+        Settings.Position = UDim2.new(-0.0045454409, 0, 1.125, 0)
+        Settings.Size = UDim2.new(0, 200, 0, 0)
+        
+        UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.Padding = UDim.new(0, 7)
+        
+        if Lists:FindFirstChild(List) then
+			SButton.Parent = Lists:FindFirstChild(List)
+		else
+			SButton:Destroy()
+		end
+        
+        local on = nil
+        
+	    for i=1,#tableee do
+	        local Setting = Instance.new("TextButton",Settings)
+            local UICorner_3 = Instance.new("UICorner",Setting)
+            local OnOff = Instance.new("Frame",Setting)
+            local UICorner_4 = Instance.new("UICorner",OnOff)
+            local Color = Instance.new("Frame",OnOff)
+            local UICorner_5 = Instance.new("UICorner",Color)
+            
+            Setting.Name = "Setting"
+            Setting.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+            Setting.Size = UDim2.new(0, 188, 0, 30)
+            Setting.Text = tableee[i]
+            Setting.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Setting.TextScaled = true
+            Setting.TextTransparency = 1.000
+            Setting.BackgroundTransparency = 1.000
+            Setting.TextWrapped = true
+            Setting.TextXAlignment = Enum.TextXAlignment.Left
+            
+            UICorner_3.CornerRadius = UDim.new(0, 6)
+            
+            OnOff.Name = "OnOff"
+            OnOff.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            OnOff.BackgroundTransparency = 1.000
+            OnOff.BorderColor3 = Color3.fromRGB(255, 255, 255)
+            OnOff.Position = UDim2.new(0.814832509, 0, 0.166666672, 0)
+            OnOff.Size = UDim2.new(0, 20, 0, 20)
+            
+            UICorner_4.CornerRadius = UDim.new(0, 258)
+            
+            Color.Name = "Color"
+            Color.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            Color.BackgroundTransparency = 1.000
+            Color.BorderColor3 = Color3.fromRGB(255, 255, 255)
+            Color.Position = UDim2.new(0.150000006, 0, 0.149999991, 0)
+            Color.Size = UDim2.new(0, 14, 0, 14)
+            
+            UICorner_5.CornerRadius = UDim.new(0, 258)
+            Setting.MouseButton1Click:Connect(function()
+                local h = tableee[i]
+                if on == h then
+                    tween:Create(Setting.OnOff.Color,TweenInfo.new(0.25),{BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)}):Play()
+                    on = nil
+                else
+                    tween:Create(Setting.OnOff.Color,TweenInfo.new(0.25),{BackgroundColor3 = Color3.new(1, 1, 1)}):Play()
+                    on = h
+                end
+                
+                local h2 = Settings:GetChildren()
+                for i=1,#h2 do
+                    if h2[i].Name == "Setting" and h2[i] ~= Setting then
+                        tween:Create(h2[i].OnOff.Color,TweenInfo.new(0.25),{BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)}):Play()
+                    end
+                end
+                pcall(callback,on)
+            end)
+	    end
+	    local h = false
+        local openin = false
+        SButton.MouseButton1Click:Connect(function()
+            if h == false and openin == false then
+        		openin = true
+        		tween:Create(Settings,TweenInfo.new(0.5),{Size = UDim2.new(0, 200,0, 102),BackgroundTransparency = 0}):Play()
+        		wait(0.5)
+        		local dde = Settings:GetChildren()
+        		for i=1,#dde do
+        		    if dde[i].Name == "Setting" then
+        		        tween:Create(dde[i],TweenInfo.new(0.25),{Transparency = 0}):Play()
+                	    tween:Create(dde[i],TweenInfo.new(0.25),{TextTransparency = 0}):Play()
+                	    tween:Create(dde[i].OnOff,TweenInfo.new(0.25),{Transparency = 0}):Play()
+                	    tween:Create(dde[i].OnOff.Color,TweenInfo.new(0.25),{Transparency = 0}):Play()
+        		    end
+        		end
+        		wait(0.25)
+        		openin = false
+        		h = true
+        	elseif openin ~= true and h == true then
+        		openin = true
+        		local dde = Settings:GetChildren()
+        		for i=1,#dde do
+        		    if dde[i].Name == "Setting" then
+        		        tween:Create(dde[i],TweenInfo.new(0.25),{Transparency = 1}):Play()
+                	    tween:Create(dde[i],TweenInfo.new(0.25),{TextTransparency = 1}):Play()
+                	    tween:Create(dde[i].OnOff,TweenInfo.new(0.25),{Transparency = 1}):Play()
+                	    tween:Create(dde[i].OnOff.Color,TweenInfo.new(0.25),{Transparency = 1}):Play()
+        		    end
+        		end
+        		wait(0.25)
+        		tween:Create(Settings,TweenInfo.new(0.5),{Size = UDim2.new(0, 200,0, 0),BackgroundTransparency = 1}):Play()
+        		wait(0.5)
+        		openin = false
+        		h = false
+        	end
+        end)
+	end
+	
+	
 	return C
 end
 
@@ -280,15 +464,21 @@ local main = Library:CreateWindow("Project Delta")
 
 main:CreateButton("Main", "Main")
 
+main:CreateButton("Visual", "Visual")
+
 main:CreateButton("Misc", "Misc")
 
 main:CreateList("Main")
+
+main:CreateList("Visual")
 
 main:CreateList("Misc")
 
 local NoFog = false
 local BotEsp = false
 local BodyEsp = false
+
+local CrosshairV = nil
 
 main:CreateListButton("Aim/Esp","Main",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Blissful4992/Miscellaneous/main/UNIVERSAL.lua"))()
@@ -298,15 +488,15 @@ main:CreateListButton("Inf Yield","Main",function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
 end)
 
-main:CreateListToggle("Bot Esp", "Main",function(state)
+main:CreateListToggle("Bot Esp", "Visual",function(state)
     BotEsp = state
 end)
 
-main:CreateListToggle("Body Esp", "Main",function(state)
+main:CreateListToggle("Body Esp", "Visual",function(state)
     BodyEsp = state
 end)
 
-main:CreateListToggle("No Fog", "Main",function(state)
+main:CreateListToggle("No Fog", "Visual",function(state)
     NoFog = state
 end)
 
@@ -315,7 +505,14 @@ main:CreateListButton("Remove Visor Effect","Misc",function()
 end)
 
 main:CreateListButton("Destroy GUI","Misc",function()
-    game.CoreGui.Exploits:Destroy()
+    game.CoreGui.PJE:Destroy()
+end)
+
+main:CreateListSButton("Crosshair", "Visual",{
+    "Crosshair",
+    "Dot"
+},function(on)
+    CrosshairV = on
 end)
 
 while wait() do
@@ -362,7 +559,7 @@ while wait() do
                 high.Size = UDim2.new(1,0,2,0)
                 high.Parent = c[i]
                 local frame = Instance.new("TextLabel",high)
-		frame.Text = c[i].Name.." (Body)"
+		        frame.Text = c[i].Name.." (Body)"
                 frame.BackgroundTransparency = 1
                 frame.TextColor3 = Color3.new(0,0,255)
                 frame.Size = UDim2.new(1,0,2,0)
@@ -370,8 +567,19 @@ while wait() do
         end
     end
     if NoFog == true then
-        game.Lighting.FogEnd = 0
-        game.Lighting.FogStart = 0
+        game.Lighting.FogEnd = math.huge
+    end
+    if CrosshairV ~= nil then
+        if CrosshairV == "Dot" then
+            game.CoreGui.Crosshair.Dot.Visible = true
+            game.CoreGui.Crosshair.Crosshair.Visible = false
+        elseif CrosshairV == "Crosshair" then
+            game.CoreGui.Crosshair.Crosshair.Visible = true
+            game.CoreGui.Crosshair.Dot.Visible = false
+        end
+    else
+        game.CoreGui.Crosshair.Dot.Visible = false
+        game.CoreGui.Crosshair.Crosshair.Visible = false
     end
     wait()
 end
